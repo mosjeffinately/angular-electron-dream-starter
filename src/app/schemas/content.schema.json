@@ -1,0 +1,74 @@
+{
+    "title": "Content Schema",
+    "description": "Describes a Blackboard content area/item.",
+    "version": 5,
+    "disableKeyCompression": false,
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "primary": true
+        },
+        "parentId": {
+            "type": ["string", "null"]
+        },
+        "title": {
+            "type": "string",
+            "default": ""
+        },
+        "body": {
+            "type": ["string", "null"],
+            "default": ""
+        },
+        "description": {
+            "type": ["string", "null"],
+            "default": ""
+        },
+        "created": {
+            "type": "string"
+        },
+        "position": {
+            "type": "number",
+            "default": 999
+        },
+        "hasChildren": {
+            "type": "boolean",
+            "default": false
+        },
+        "availability": {
+            "type": "object",
+            "properties": {
+                "available": {
+                    "type": "string"
+                },
+                "allowGuests": {
+                    "type": "boolean"
+                },
+                "adaptiveRelease": {
+                    "properties": {
+                        "start": {
+                            "type": ["string", "null"]
+                        },
+                        "end": {
+                            "type": ["string", "null"]
+                        }
+                    }
+                }
+            }
+        },
+        "contentHandler": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                }
+            }
+        },
+        "courseId": {
+            "type": "string"
+        }
+    },
+    "attachments": {
+        "encrypted": false
+    }
+}

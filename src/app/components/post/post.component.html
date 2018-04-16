@@ -1,0 +1,22 @@
+<div *ngFor="let post of posts">
+    <div class="row">
+        <div class="col-md-12">
+        <!-- <div [ngClass]="['col-md-' + (12 - depth), 'offset-md-' + depth]"> -->
+            <div [ngStyle]="{'margin-left': (20 * depth) + 'px'}" class="card">
+                <div class="card-body m-1">
+                    <i class="fa fa-user fa-2x fa-pull-left fa-border"></i>
+                    <p class="h6">
+                        <strong>{{ post.author }}</strong>
+                        <span class="float-right"><small>{{ 'posted_on_label' | translate: param}}: {{ post.postedDate | date: 'M/d/yy h:mm a'  }}</small></span>
+                    </p>
+                    <p class="h6">
+                        <strong [innerHTML]="post.title | safeHtml"></strong>
+                        <span *ngIf="post.editedDate != post.postedDate" class="float-right"><small>{{ 'edited_on_label' | translate: param }}: {{ post.editedDate | date: 'M/d/yy h:mm a' }}</small></span>
+                    </p>
+                    <p [innerHTML]="post.body | safeHtml"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <post *ngIf="postMap.get(post.id)" [posts]="postMap.get(post.id)" [depth]="depth + 1"></post>
+</div>

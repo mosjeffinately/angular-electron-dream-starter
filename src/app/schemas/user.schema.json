@@ -1,0 +1,33 @@
+{
+    "title": "User Schema",
+    "description": "Describes a Blackboard user.",
+    "version": 1,
+    "disableKeyCompression": false,
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "primary": true
+        },
+        "externalId": {
+            "type": "string",
+            "default": ""
+        },
+        "userName": {
+            "type": "string",
+            "default": ""
+        },
+        "password": {
+            "type": "string",
+            "encrypted": true
+        },
+        "givenName": {
+            "type": "string",
+            "default": ""
+        },
+        "familyName": {
+            "type": "string",
+            "default": ""
+        }
+    }
+}

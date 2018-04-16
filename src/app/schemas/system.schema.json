@@ -1,0 +1,39 @@
+{
+    "title": "System Schema",
+    "description": "Describes a Blackboard instance system.",
+    "version": 2,
+    "disableKeyCompression": false,
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "primary": true
+        },
+        "url": {
+            "type": "string"
+        },
+        "version": {
+            "type": "object",
+            "properties": {
+                "learn": {
+                    "type": "object",
+                    "properties": {
+                        "major": {
+                            "type": "number"
+                        },
+                        "minor": {
+                            "type": "number"
+                        },
+                        "patch": {
+                            "type": "number"
+                        },
+                        "build": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "required": ["url"]
+}

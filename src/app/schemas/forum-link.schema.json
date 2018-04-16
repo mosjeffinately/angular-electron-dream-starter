@@ -1,0 +1,19 @@
+{
+    "title": "Forum Link Schema",
+    "description": "Describes a Blackboard forum link.",
+    "version": 1,
+    "disableKeyCompression": false,
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "primary": true
+        },
+        "title": {
+            "type": "string"
+        },
+        "contentId": {
+            "type": "string"
+        }
+    }
+}

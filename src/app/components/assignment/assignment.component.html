@@ -1,0 +1,149 @@
+<div class="container-fluid" id="assignment-card">
+    <div class="animated fadeIn">
+        <!-- <ng-snotify></ng-snotify> -->
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li *ngFor="let breadcrumb of breadcrumbs; let i = index" class="breadcrumb-item" [ngClass]="{active: i == breadcrumbs?.length - 1}">
+                        <a *ngIf="i != breadcrumbs?.length - 1" [routerLink]="['../../course-contents', breadcrumb.id]" [innerHTML]="breadcrumb.title | safeHtml"></a>
+                        <span *ngIf="i == breadcrumbs?.length - 1" tabindex="0" [innerHTML]="breadcrumb.title | safeHtml"></span>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" [innerHTML]="content.title | safeHtml"></div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="assignment; else loading" class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>{{ 'assignment_information_lbl' | translate: param }}</strong>
+                    </div>
+                    <div class="card-block">
+                        <div *ngIf="content.body">
+                            <p [innerHTML]="content.body"></p>
+                        </div>
+                        <div *ngIf="assignment.dueDate" class="attachment-group">
+                            <div class="row mb-1">
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">{{ 'assignment_duedate_lbl' | translate: param }}</span>
+                                        <input id="dueDate" type="text" class="form-control" value="{{ assignment.dueDate | date: 'M/d/yy h:mm a'  }}" readonly>
+                                        <span class="btn-group">
+                                            <button class="btn btn-sm btn-secondary" disabled>
+                                                <i class="fa fa-calendar fa-fw"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="assignment.pointsPossible" class="attachment-group">
+                            <div class="row mb-1">
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">{{ 'assignment_points_possible_lbl' | translate: param }}</span>
+                                        <input id="pointsPossible" type="text" class="form-control" value="{{ assignment.pointsPossible }}" readonly>
+                                        <span class="btn-group">
+                                            <button class="btn btn-sm btn-secondary" disabled>
+                                                <i class="fa fa-asterisk fa-fw"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="attachments.get(content.id) && attachments.get(content.id).length > 0" class="attachment-group">
+                            <div *ngFor="let attachment of attachments.get(content.id)" class="form-group">
+                                <div class="row mb-1">
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">{{ 'attachment_label' | translate: param }}</span>
+                                            <input type="text" class="form-control" value="{{ attachment.filename }} - {{ bytesToSize(attachment.filesize) }}" readonly>
+                                            <span *ngIf="!hasAttachment(attachment)" class="btn-group">
+                                                <button *ngIf="!isDownloading(attachment)" [attr.id]="'dl-' + attachment.id" class="btn btn-sm btn-primary" type="button" (click)="downloadAttachment(attachment)">
+                                                    <i class="fa fa-cloud-download fa-fw"></i>
+                                                </button>
+                                                <button *ngIf="isDownloading(attachment)" [attr.id]="'saving-' + attachment.id" class="btn btn-sm btn-primary" type="button">
+                                                    <i class="fa fa-spinner fa-spin fa-fw"></i>
+                                                </button>
+                                            </span>
+                                            <span *ngIf="hasAttachment(attachment)" class="btn-group">
+                                                <button [attr.id]="'open-' + attachment.id" class="btn btn-sm btn-success" type="button" (click)="openAttachment(attachment)">
+                                                    <i class="fa fa-folder-open-o fa-fw"></i>
+                                                </button>
+                                                <button [attr.id]="'delete-' + attachment.id" class="btn btn-sm btn-danger" type="button" (click)="deleteAttachment(attachment)">
+                                                    <i class="fa fa-trash-o fa-fw"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="assignmentForm; else loading" class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>{{ 'assignment_submission_lbl' | translate: param }}</strong>
+                    </div>
+                    <form [formGroup]="assignmentForm" (ngSubmit)="submitAssignment(assignmentForm)">
+                        <div class="card-block">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12 pb-1">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">{{ 'assignment_txt_submission_lbl' | translate: param }}</span>
+                                            <textarea class="form-control" formControlName="textSubmission" rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 pb-1">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">{{ 'assignment_attach_file_lbl' | translate: param }}</span>
+                                            <input type="text" class="form-control" formControlName="fileAttachment" readonly>
+                                            <span class="btn-group">
+                                                <button class="btn btn-sm btn-primary" type="button" (click)="fileUpload()">
+                                                    <i class="fa fa-paperclip fa-fw"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 pb-1">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">{{ 'assignment_comments_lbl' | translate: param }}</span>
+                                            <textarea class="form-control" formControlName="comments" rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-danger" (click)="cancelAssignment()"><i class="fa fa-times fa-fw mr-1"></i>{{ 'cancel_label' | translate: param }}</button>
+                            <button type="button" class="btn btn-success" (click)="saveAssignment(assignmentForm)"><i class="fa fa-floppy-o fa-fw mr-1"></i>{{ 'assignment_save_label' | translate: param }}</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw mr-1"></i>{{ 'submit_label' | translate: param }}</button>
+                        </div>
+                    </form>
+                </div>          
+            </div>
+        </div>
+        <ng-template #loading>
+            <div class="row justify-content-center">
+                <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                <span class="sr-only">Loading...</span>
+            </div>
+        </ng-template>
+    </div>
+</div>

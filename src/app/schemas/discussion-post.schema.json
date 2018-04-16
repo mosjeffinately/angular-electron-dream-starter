@@ -1,0 +1,40 @@
+{
+    "title": "Discussion Post Schema",
+    "description": "Describes a Blackboard discussion post.",
+    "version": 2,
+    "disableKeyCompression": false,
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "primary": true
+        },
+        "title": {
+            "type": "string"
+        },
+        "body": {
+            "type": "string"
+        },
+        "author": {
+            "type": "string"
+        },
+        "postedDate": {
+            "type": "string"
+        },
+        "editedDate": {
+            "type": "string"
+        },
+        "hasAttachment": {
+            "type": "boolean"
+        },
+        "threadId": {
+            "type": "string"
+        },
+        "parentId": {
+            "type": ["string", "null"]
+        }
+    },
+    "attachments": {
+        "encrypted": false
+    }
+}

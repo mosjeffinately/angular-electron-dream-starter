@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row mt-2">
+            <div class="col-md-12">
+                <div class="card bg-faded">
+                    <div class="card-block">
+                        <strong>{{ 'discussions_label' | translate: param }}</strong>
+                        <hr>
+                        <p clas="card-text">{{ 'discussions_instructions' | translate: param }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="discussions; else loading" class="row justify-content-start">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-block">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>{{ 'discussion_board_label' | translate: param }}</th>
+                                    <th>{{ 'forums_label' | translate: param }}</th>
+                                    <th>{{ 'participants_label' | translate: param }}</th>
+                                    <th>{{ 'posts_label' | translate: param }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-template let-discussion ngFor [ngForOf]="discussions">
+                                    <tr>
+                                        <td>
+                                            <a [routerLink]="['/main-app/forums']" (click)="loadDiscussion(discussion.id)">
+                                                {{ discussion.title }}
+                                            </a>
+                                        </td>
+                                        <td>{{ discussion.forums }}</td>
+                                        <td>{{ discussion.participants }}</td>
+                                        <td>{{ discussion.posts }}</td>
+                                    </tr>
+                                </ng-template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-template #loading>
+            <div class="row justify-content-center mt-5">
+                <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                <span class="sr-only">Loading...</span>
+            </div>
+        </ng-template>
+    </div>
+</div>

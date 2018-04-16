@@ -1,0 +1,53 @@
+{
+    "title": "Content Area Schema",
+    "description": "Describes a Blackboard content area.",
+    "version": 3,
+    "disableKeyCompression": false,
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "primary": true
+        },
+        "title": {
+            "type": "string",
+            "default": ""
+        },
+        "created": {
+            "type": "string"
+        },
+        "position": {
+            "type": "number",
+            "default": 999
+        },
+        "hasChildren": {
+            "type": "boolean",
+            "default": false
+        },
+        "availability": {
+            "type": "object",
+            "properties": {
+                "available": {
+                    "type": "string"
+                },
+                "allowGuests": {
+                    "type": "boolean"
+                },
+                "adaptiveRelease": {
+                    "type": "object"
+                }
+            }
+        },
+        "contentHandler": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                }
+            }
+        },
+        "courseId": {
+            "type": "string"
+        }
+    }
+}

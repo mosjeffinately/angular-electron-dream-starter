@@ -1,0 +1,28 @@
+{
+    "title": "Attachment Schema",
+    "description": "Describes a Blackboard attachment.",
+    "version": 4,
+    "disableKeyCompression": false,
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "primary": true
+        },
+        "filename": {
+            "type": "string"
+        },
+        "fileId": {
+            "type": "string"
+        },
+        "filesize": {
+            "type": "number"
+        },
+        "contentId": {
+            "type": "string"
+        }
+    },
+    "attachments": {
+        "encrypted": false
+    }
+}

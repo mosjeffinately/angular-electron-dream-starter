@@ -1,0 +1,64 @@
+<div class="container-fluid">
+        <div class="animated fadeIn">
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    <div class="card bg-faded">
+                        <div class="card-block">
+                            <strong>{{ 'forum_label' | translate: param }}: {{ forum.title }}</strong>
+                            <span class="float-right">
+                                <a [routerLink]="['/main-app/forums']">
+                                    <i class="fa fa-chevron-circle-left fa-lg"></i>
+                                    &nbsp;
+                                    {{ 'back_label' | translate: param }}
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="threads; else loading" class="row justify-content-start">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-block">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th width="15%">{{ 'date_label' | translate: param }}</th>
+                                        <th width="25%">{{ 'thread_label' | translate: param }}</th>
+                                        <th width="20%">{{ 'author_label' | translate: param }}</th>
+                                        <th width="10%">{{ 'status_label' | translate: param }}</th>
+                                        <th width="15%">{{ 'unread_posts_label' | translate: param }}</th>
+                                        <th width="15%">{{ 'total_posts_label' | translate: param }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-template let-thread ngFor [ngForOf]="threads">
+                                        <tr>
+                                            <td>{{ thread.postDate | date: 'M/d/yy h:mm a' }}</td>
+                                            <td>
+                                                <a [routerLink]="['/main-app/posts']" [innerHTML]="thread.title | safeHtml" (click)="loadThread(thread.id)"></a>
+                                            </td>
+                                            <td>{{ thread.author }}</td>
+                                            <td>{{ thread.status }}</td>
+                                            <td class="text-center">
+                                                <h6>
+                                                    <span class="badge badge-pill badge-primary">{{ thread.unreadPosts }}</span>
+                                                </h6>
+                                            </td>
+                                            <td class="text-center">{{ thread.totalPosts }}</td>
+                                        </tr>
+                                    </ng-template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ng-template #loading>
+                <div class="row justify-content-center mt-5">
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </ng-template>
+        </div>
+    </div>

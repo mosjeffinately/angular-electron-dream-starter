@@ -1,0 +1,29 @@
+{
+    "title": "Assignment Submission Schema",
+    "description": "Describes a Blackboard assignment submission.",
+    "version": 4,
+    "disableKeyCompression": false,
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "primary": true
+        },
+        "textSubmission": {
+            "type": "string"
+        },
+        "fileAttachment": {
+            "type": ["string", "null"]
+        },
+        "comments": {
+            "type": "string"
+        },
+        "submissionStatus": {
+            "type": "number",
+            "default": 0
+        }
+    },
+    "attachments": {
+        "encrypted": false
+    }
+}

@@ -1,0 +1,58 @@
+<div class="container-fluid">
+        <div class="animated fadeIn">
+            <div class="row justify-content-start">
+                <div class="col-md-12">
+                    <div class="card border-secondary mt-2">
+                        <div class="card-header"><strong>{{ 'language_label' | translate: param }}</strong></div>
+                        <div class="card-body mt-1">
+                            <div class="row">
+                                <fieldset class="form-group col-md-8 ml-1">
+                                    <label>{{ 'select_language_label' | translate: param }}</label>
+                                    <select [(ngModel)]="language" class="form-control">
+                                        <option *ngFor="let lang of languages" [value]="lang.id" [selected]="language == lang.id">
+                                            {{ lang.name }}
+                                        </option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <button class="btn btn-primary float-right" type="button" (click)="updateLanguage(language)">
+                                        <i class="fa fa-floppy-o"></i>
+                                        {{ 'submit_label' | translate: param }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <alert *ngIf="alert" [type]="alert.type" [dismissable]="dismissable">{{ alert.msg }}</alert> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-start">
+                <div class="col-md-12">
+                    <div class="card border-secondary mt-2">
+                        <div class="card-header"><strong>{{ 'delete_data_label' | translate: param }}</strong></div>
+                        <div class="card-body mt-1 mb-1">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <p class="card-text ml-1">{{ 'delete_data_message' | translate: param }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <button class="btn btn-danger float-right" type="button" (click)="deleteAllData()">
+                                        <i class="fa fa-times"></i>
+                                        {{ 'delete_label' | translate: param }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

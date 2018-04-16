@@ -29,7 +29,7 @@ const SpecifyTsFilesPlugin = require('./specify-ts-files-plugin');
 const HMR = helpers.hasProcessFlag('hot');
 const AOT = helpers.hasNpmFlag('aot');
 const METADATA = {
-  title: 'Angular Electron Dream Starter by Colin Skow & @AngularClass',
+  title: 'Bb Offline',
   baseUrl: '',
   isDevServer: helpers.isWebpackDevServer()
 };
@@ -149,7 +149,6 @@ module.exports = function (options) {
           ],
           exclude: [/\.(spec|e2e)\.ts$/]
         },
-
         /*
          * Json loader support for *.json files.
          *
@@ -379,6 +378,11 @@ module.exports = function (options) {
         tsConfigBase: tsConfigBase,
         customTsConfigFileName: customTsConfigFileName
       })
+
+      // new TsConfigPathsPlugin({
+      //   configFileName: helpers.root('src', 'tsconfig.json'),
+      //   compiler: 'typescript'
+      // })
 
     ],
 

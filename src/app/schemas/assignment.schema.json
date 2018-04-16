@@ -1,0 +1,20 @@
+{
+    "title": "Assignment Schema",
+    "description": "Describes a Blackboard assignment.",
+    "version": 0,
+    "disableKeyCompression": false,
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "primary": true
+        },
+        "dueDate": {
+            "type": "string"
+        },
+        "pointsPossible": {
+            "type": "number"
+        }
+    },
+    "required": ["pointsPossible"]
+}

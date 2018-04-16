@@ -1,0 +1,76 @@
+<nav class="sidebar-nav">
+    <ul class="nav">
+        <li *ngIf="course" class="nav-title text-center">
+            <span>{{course.name}}</span>
+        </li>
+        <div *ngIf="contentAreas; else loading">
+            <ng-template let-contentArea ngFor [ngForOf]="contentAreas">
+                <li class="nav-item">
+                    <a class="nav-link" [ngClass]="{active: selectedItem == contentArea.id}" [routerLink]="['course-contents', contentArea.id]" (click)="activate(contentArea.id)">
+                        <i class="fa fa-folder fa-lg fa-fw" aria-hidden="true"></i>
+                        {{contentArea.title}}
+                    </a>
+                </li>
+            </ng-template>
+            <li class="nav-item">
+                <a class="nav-link" [ngClass]="{active: selectedItem == 'discussions'}" [routerLink]="['discussions']" (click)="activate('discussions')">
+                    <i class="fa fa-comments fa-lg fa-fw" aria-hidden="true"></i>
+                    {{ 'discussions_label' | translate: param }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [ngClass]="{active: selectedItem == 'course-announcements'}" [routerLink]="['course-announcements']" (click)="activate('course-announcements')">
+                    <i class="fa fa-bullhorn fa-lg fa-fw" aria-hidden="true"></i>
+                    {{ 'course_announcements_label' | translate: param }}
+                </a>
+            </li>
+        </div>
+        <li class="divider"></li>
+        <li class="nav-title text-center">
+            <span>{{ 'myinstitution_label' | translate: param }}</span>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [ngClass]="{active: selectedItem == 'announcements'}" [routerLink]="['/', 'courses', 'announcements']" (click)="activate('announcements')">
+                <i class="fa fa-bullhorn fa-lg fa-fw" aria-hidden="true"></i>
+                {{ 'announcements_label' | translate: param }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [ngClass]="{active: selectedItem == 'courses'}" [routerLink]="['/', 'courses', 'course-memberships']" (click)="activate('courses')">
+                <i class="fa fa-book fa-lg fa-fw" aria-hidden="true"></i>
+                {{ 'courses_label' | translate: param }}
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li class="nav-title text-center">
+            <span>{{ 'tools_label' | translate: param }}</span>
+        </li>
+        <li class="nav-item">
+            &nbsp;
+            <label class="switch switch-default switch-success switch-sm">
+                <input [attr.checked]="!isOnline ? 'checked' : null" (click)="toggleOnlineStatus()" class="switch-input" type="checkbox">
+                <span class="switch-label"></span>
+                <span class="switch-handle"></span>
+            </label>
+            &nbsp;{{ 'offline_btn_label' | translate: param }}
+        </li>
+        <li class="nav-item">
+                <a class="nav-link" [ngClass]="{active: selectedItem == 'settings'}" [routerLink]="['/', 'courses', 'settings']" (click)="activate('settings')">
+                    <i class="fa fa-cog fa-lg fa-fw"></i>
+                    {{ 'settings_label' | translate: param }}
+                </a>
+            </li>
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/', 'login']">
+                <i class="fa fa-sign-out fa-lg fa-fw"></i>
+                {{ 'signout_label' | translate: param }}
+            </a>
+        </li>
+    </ul>
+    <ng-template #loading>
+            <div class="row justify-content-center">
+                <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                <span class="sr-only">Loading...</span>
+            </div>
+    </ng-template>
+</nav> 

@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div *ngIf="courseList; else loading">
+            <div class="row justify-content-start mt-2">
+                <div class="card-deck">
+                    <ng-template let-course ngFor [ngForOf]="courseList">
+                        <div class="card card-accent-primary mb-2">
+                            <div class="card-header">
+                                {{course.name}}
+                            </div>
+                            <div class="card-block">
+                                <p class="card-text text-muted">ID: {{course.courseId}}</p>
+                                <p class="card-text">{{course.description}}</p>
+                                <a [routerLink]="['/main-app/course-announcements']" (click)="loadCourse(course.id)" class="black-text d-flex flex-row-reverse">
+                                    <p class="waves-effect">{{ 'go_to_course_label' | translate:param }} <i class="fa fa-chevron-right"></i></p>
+                                </a>
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        <ng-template #loading>
+            <div class="row justify-content-center mt-5">
+                <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                <span class="sr-only">Loading...</span>
+            </div>
+        </ng-template>
+    </div>
+</div>

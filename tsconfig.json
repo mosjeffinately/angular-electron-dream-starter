@@ -6,6 +6,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
+    "allowJs": true,
     "sourceMap": true,
     "noEmit": true,
     "noEmitHelpers": true,
@@ -14,6 +15,7 @@
     "isolatedModules": false,
     "lib": [
       "dom",
+      "es2015",
       "es6"
     ],
     "typeRoots": [

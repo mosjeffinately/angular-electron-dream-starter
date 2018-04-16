@@ -1,0 +1,31 @@
+{
+    "title": "Discussion Board Schema",
+    "description": "Describes a Blackboard discussion board.",
+    "version": 0,
+    "disableKeyCompression": false,
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "primary": true
+        },
+        "title": {
+            "type": "string"
+        },
+        "position": {
+            "type": "number"
+        },
+        "forums": {
+            "type": "number"
+        },
+        "participants": {
+            "type": "number"
+        },
+        "posts": {
+            "type": "number"
+        },
+        "courseId": {
+            "type": "string"
+        }
+    }
+}

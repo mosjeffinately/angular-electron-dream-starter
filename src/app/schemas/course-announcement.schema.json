@@ -1,0 +1,34 @@
+{
+    "title": "Course Announcement Schema",
+    "description": "Describes a Blackboard course announcement.",
+    "version": 0,
+    "disableKeyCompression": false,
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "primary": true
+        },
+        "title": {
+            "type": "string"
+        },
+        "body": {
+            "type": "string"
+        },
+        "startDate": {
+            "type": ["string","null"],
+            "default": ""
+        },
+        "endDate": {
+            "type": ["string","null"],
+            "default": ""
+        },
+        "timeZone": {
+            "type": ["string","null"],
+            "default": ""
+        },
+        "courseId": {
+            "type": "string"
+        }
+    }
+}

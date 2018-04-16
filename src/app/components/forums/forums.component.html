@@ -1,0 +1,62 @@
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row mt-2">
+            <div class="col-md-12">
+                <div class="card bg-faded">
+                    <div class="card-block">
+                        <strong>{{ 'discussion_board_label' | translate: param }}</strong>
+                        <span class="float-right">
+                            <a [routerLink]="['/main-app/discussions']">
+                                <i class="fa fa-chevron-circle-left fa-lg"></i>
+                                &nbsp;
+                                {{ 'back_label' | translate: param }}
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="forums; else loading" class="row justify-content-start">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-block">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>{{ 'forum_label' | translate: param }}</th>
+                                    <th>{{ 'description_label' | translate: param }}</th>
+                                    <th>{{ 'total_posts_label' | translate: param }}</th>
+                                    <th>{{ 'unread_posts_label' | translate: param }}</th>
+                                    <th>{{ 'total_participants_label' | translate: param }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-template let-forum ngFor [ngForOf]="forums">
+                                    <tr>
+                                        <td>
+                                            <a [routerLink]="['/main-app/threads']" [innerHTML]="forum.title | safeHtml" (click)="loadForum(forum.id)"></a>
+                                        </td>
+                                        <td [innerHTML]="forum.description | safeHtml"></td>
+                                        <td class="text-center">{{ forum.posts }}</td>
+                                        <td class="text-center">
+                                            <h6>
+                                                <span class="badge badge-pill badge-primary">{{ forum.unreadPosts }}</span>
+                                            </h6>
+                                        </td>
+                                        <td class="text-center">{{ forum.participants }}</td>
+                                    </tr>
+                                </ng-template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-template #loading>
+            <div class="row justify-content-center mt-5">
+                <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                <span class="sr-only">Loading...</span>
+            </div>
+        </ng-template>
+    </div>
+</div>

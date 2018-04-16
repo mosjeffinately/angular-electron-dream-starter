@@ -4,82 +4,42 @@
 import {
   Component,
   OnInit,
-  ViewEncapsulation
+  ViewEncapsulation,
+  ViewContainerRef
 } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/take';
 import { shell } from 'electron';
-import { AppState } from './reducers';
-import { Store } from '@ngrx/store';
-import { HomeState } from './home/home.reducer';
+import { TranslateService } from '@ngx-translate/core';
 
+const Store = window.require('electron-store');
+const store = new Store();
 /*
  * App Component
  * Top Level Component
  */
 @Component({
   selector: 'app',
-  encapsulation: ViewEncapsulation.None,
-  styleUrls: [
-    './app.component.css'
-  ],
-  template: `
-    <nav>
-      <a [routerLink]=" ['./'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        Index
-      </a>
-      <a [routerLink]=" ['./home'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        Home
-      </a>
-      <a [routerLink]=" ['./detail'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        Detail
-      </a>
-      <a [routerLink]=" ['./barrel'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        Barrel
-      </a>
-      <a [routerLink]=" ['./about'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        About
-      </a>
-    </nav>
-
-    <main>
-      <router-outlet></router-outlet>
-    </main>
-
-    <pre class="app-state">this.state$ = {{ state$ | async | json }}</pre>
-
-    <footer>
-      <span>
-        Angular Electron Dream Starter by <a (click)="openURL(url)" href="#">@ColinSkow</a>
-      </span>
-      <div>
-        <a [href]="url">
-          <img [src]="angularclassLogo" width="25%">
-        </a>
-      </div>
-    </footer>
-  `
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  public angularclassLogo = 'assets/img/angular-electron.svg';
-  public name = 'Angular Electron Dream Starter';
-  public url = 'https://github.com/colinskow/angular-electron-dream-starter';
-  public state$: Observable<HomeState>;
+  public bbLogo = 'assets/img/logo.png';
 
-  constructor(private store: Store<AppState>) {
-    this.state$ = this.store.select(state => state.home);
+  constructor(private translate: TranslateService) {
+
+    let language = store.get('bbofflineLanguage');
+    console.debug('Loaded language:', language);
+    if( language ) {
+      translate.setDefaultLang(language);
+      translate.use(language);
+    }
+    else {
+      translate.setDefaultLang('en');
+      translate.use('en')
+    }
   }
 
   public ngOnInit() {
-    this.state$.take(1)
-      .subscribe(state => {
-        console.log('Initial App State', state);
-      });
   }
 
   public openURL(url) {

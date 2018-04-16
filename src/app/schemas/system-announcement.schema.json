@@ -1,0 +1,47 @@
+{
+    "title": "System Announcement Schema",
+    "description": "Describes a Blackboard system announcement.",
+    "version": 2,
+    "disableKeyCompression": false,
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "primary": true
+        },
+        "title": {
+            "type": "string",
+            "default": ""
+        },
+        "body": {
+            "type": "string",
+            "default": ""
+        },
+        "created": {
+            "type": "string",
+            "default": ""
+        },
+        "availability": {
+            "type": "object",
+            "properties": {
+                "duration": {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        },
+                        "start": {
+                            "type": ["string", "null"]
+                        },
+                        "end": {
+                            "type": ["string", "null"]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "attachments": {
+        "encrypted": false
+    }
+}

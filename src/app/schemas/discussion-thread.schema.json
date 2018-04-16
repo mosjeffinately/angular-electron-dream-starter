@@ -1,0 +1,34 @@
+{
+    "title": "Discussion Thread Schema",
+    "description": "Describes a Blackboard discussion thread.",
+    "version": 1,
+    "disableKeyCompression": false,
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "primary": true
+        },
+        "title": {
+            "type": "string"
+        },
+        "postDate": {
+            "type": "string"
+        },
+        "author": {
+            "type": "string"
+        },
+        "status": {
+            "type": "string"
+        },
+        "totalPosts": {
+            "type": "number"
+        },
+        "unreadPosts": {
+            "type": "number"
+        },
+        "forumId": {
+            "type": "string"
+        }
+    }
+}
